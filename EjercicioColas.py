@@ -1,4 +1,5 @@
 import random
+import math
 class node:
     def __init__(self, dato, siguiente=None, anterior=None) -> None:
         
@@ -53,7 +54,7 @@ while contador_minutos < 600:
     minuto_salida = random.randint(2, 4)
 
     if(contador_minutos_extra >= minuto_llegada):
-        cliente = persona(no_persona, minuto_llegada)
+        cliente = persona(no_persona, contador_minutos)
         colaCajero.enqueue(cliente)
         no_persona +=1
         contador_minutos_extra -= minuto_llegada
@@ -99,7 +100,9 @@ while contador_minutos < 600:
             no_persona +=1
             colaCajero.dequeue()
 
+horas = math.trunc(colaCajero.inicio.dato.minutollegada/60)
+minutos = round(((colaCajero.inicio.dato.minutollegada/60)-horas)*60)
+
 print("\nCantidad de clientes atendidos: " + str(no_persona - 1))
 print("Cantidad de clientes después de las 10 horas: "+ str(colaCajero.size))
-print("Tiempo de primer cliente no atendido: " + str(colaCajero.inicio.dato.minutollegada) + " minutos.")
-#print(contador_minutos)
+print("Tiempo de primer cliente no atendido: " + str(horas) + " horas y " + str(minutos) + " minutos.\n")
